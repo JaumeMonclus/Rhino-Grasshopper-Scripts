@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:;base64,=">
+    <title>rhino3dm: Loading local files</title>
+    <!-- Bootstrap CSS (opcional, pero recomendado para facilidad de estilo) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <style>
+      body { margin: 0; }
+      
+      /* Spinner de carga */
+      #loader {
+        border: 20px solid #f3f3f3;
+        border-top: 20px solid #3d3d3d;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+        position: absolute; /* Cambiado a absolute */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Contenedor del visor */
+      html, body {
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        }
+      #container {
+        position: relative;
+        width: calc(100% - 500px);
+        height: calc(100vh - 56px); /* Asegúrate de descontar la altura real de la navbar */
+        margin: 0;
+        padding: 0;
+        left: 300px;
+      }
+      #sidePanel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 100%;
+        background: #f1f1f1;
+        border-right: 1px solid #ccc;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow: auto;
+      }
+      #interiorsearchpannel {
+        margin-top: 20px;
+        padding: 10px;
+        background: #d7d7d7;
+        border: 1px solid #dadada;
+        border-radius: 5px;
+        }
+    #searchresults {
+        border: 1px solid rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.2);
+        min-height: 50px; /* Al menos 200 píxeles de alto */
+        padding: 10px;     /* Espacio interno para mayor legibilidad */
+        
+        }
+
+    #navbar {
+        margin-left: 300px;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Barra de navegación con el selector a la derecha -->
+    <nav id ="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Rhino Viewport</a>
+        <!-- Esta sección se posiciona a la derecha -->
+        <div class="d-flex align-items-center ms-auto">
+          <label for="file-upload" class="text-light me-2">Select a file:</label>
+          <input type="file" accept=".3dm" id="file-upload" class="form-control" style="max-width: 200px; ">
+        </div>
+      </div>
+    </nav>
+
+    <div id="sidePanel">
+        <h3> Object Properties</h3>
+        <div id="objectproperties">
+            <p> Select an object to access it's properties</p>
+        </div>
+        <h4>Object Searcher</h4>
+            <div id="interiorsearchpannel">
+                <input type="text" id="search-input" placeholder="Search objects..." style="width: 100%; padding: 5px; border: 1px solid #ffffff; border-radius: 5px;">
+                <div id="searchresults"  placeholder="Search objects..." style="margin-top: 10px;"></div>
+            </div>
+    </div>
+    
+    <!-- Contenedor principal para el visor Three.js -->
+    <div id="container">
+      <div id="loader"></div>
+      <!-- Aquí se insertará el canvas de Three.js -->
+    </div>
+    
+    <!-- Import maps polyfill -->
+    <script async src="https://unpkg.com/es-module-shims@1.8.2/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+          "three/examples/jsm/controls/OrbitControls": "https://unpkg.com/three@0.158.0/examples/jsm/controls/OrbitControls.js",
+          "three/examples/jsm/loaders/3DMLoader": "https://unpkg.com/three@0.158.0/examples/jsm/loaders/3DMLoader.js"
+        }
+      }
+    </script>
+    <script type="module" src="./script.js"></script>
+    
+    <!-- Bootstrap JS Bundle (opcional, para funcionalidades de la navbar) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
