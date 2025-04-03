@@ -348,7 +348,6 @@ class TorusStripes:
             joined_second_meshes.append(joined_mesh)
         
         return joined_first_meshes, joined_second_meshes
-        
     
 def shortestPath(G, source, target):
 
@@ -359,40 +358,31 @@ def shortestPath(G, source, target):
 
     return pts, faceInd, sp       
           
-    
-    
+
+
+
+
+########################
+### initial OUTPUTS  ###
+########################
 
 G, dv,de = DualGraphFromMesh(m)
-
 SP = shortestPath(G, s, t)
 pts = SP[0]
 faceInd = SP[1]
-# ts = th.list_to_tree(torus_stripes(m,s,G))
 
-# como saco la class TorusStripes de la lista?
+###############
+### OUTPUTS ###
+###############
+
 torus = TorusStripes(m,G)
 mesh_faces = th.list_to_tree(torus.mesh_faces())
 unordered_stripes = th.list_to_tree(torus.torus_stripes())
 sorted_faces = th.list_to_tree(torus.sorting_mesh_faces())
 sorted_stripes = th.list_to_tree(torus.sorted_stripes()[0])
+sorted_keys = th.list_to_tree(torus.sorted_stripes()[1])
 joined_first_meshes = th.list_to_tree(torus.unroll()[0])
 joined_second_meshes = th.list_to_tree(torus.unroll()[1])
-
-
-
-# pruebas
-
-
-# sorted_faces = torus.sorting_mesh_faces()
-
-
-# m = th.list_to_tree(torus_stripes(m,s,G))
-
-a= dv
-b = de
-c = faceInd
-d = th.list_to_tree(torus.sorted_stripes()[1])
-
 
 #plot
 # path= r"C:\Users\david\Desktop\Session02\session02\images\MDPA_plot5.png"
