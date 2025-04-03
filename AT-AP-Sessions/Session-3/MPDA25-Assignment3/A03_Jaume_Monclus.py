@@ -359,9 +359,6 @@ def shortestPath(G, source, target):
     return pts, faceInd, sp       
           
 
-
-
-
 ########################
 ### initial OUTPUTS  ###
 ########################
