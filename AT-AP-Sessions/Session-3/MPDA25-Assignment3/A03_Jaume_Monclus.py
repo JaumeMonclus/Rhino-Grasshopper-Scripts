@@ -327,35 +327,28 @@ class TorusStripes:
 
         # primero juntamos las mallas
 
-        # joined_meshes = []
+        joined_first_meshes = []  
 
-        # for meshes in self.first_halves:
-        #     comps.MeshJoin(meshes)
-        #     joined_meshes.append(meshes)
-        joined_first_meshes = comps.MeshJoin(th.list_to_tree(self.first_halves))
-        joined_second_meshes = comps.MeshJoin(th.list_to_tree(self.second_halves))
+        # para las caras exteriores convexas
 
-        # joined_first_meshes[0].Normals.ComputeNormals()
+        for mesh_list in self.first_halves:
+            if not mesh_list:
+                continue  
+            joined_mesh = comps.MeshJoin(mesh_list)
+            joined_first_meshes.append(joined_mesh)
 
+        joined_second_meshes = []  
 
+        # para las caras interiores concavas
+
+        for mesh_list in self.second_halves:
+            if not mesh_list:
+                continue  
+            joined_mesh = comps.MeshJoin(mesh_list)
+            joined_second_meshes.append(joined_mesh)
         
         return joined_first_meshes, joined_second_meshes
         
-
-        
-        
-
-        
-
-
-
-           
-            
-
-
-        return lengths
-    
-
     
 def shortestPath(G, source, target):
 
