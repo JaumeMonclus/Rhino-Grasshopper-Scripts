@@ -349,6 +349,10 @@ class TorusStripes:
         
         return joined_first_meshes, joined_second_meshes
     
+
+
+    
+    
 def shortestPath(G, source, target):
 
     sp = nx.shortest_path(G, source, target, weight = "weight")
